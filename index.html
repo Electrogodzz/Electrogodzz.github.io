@@ -27,14 +27,14 @@
     </div>
 
     <script>
-      var buildUrl = "Build"; // Ensure this matches your folder structure
+      var buildUrl = "./Build"; // Adjusted for root directory setup
       var loaderUrl = buildUrl + "/CPS.loader.js";
 
       var config = {
         dataUrl: buildUrl + "/CPS.data.br",
         frameworkUrl: buildUrl + "/CPS.framework.js.br",
         codeUrl: buildUrl + "/CPS.wasm.br",
-        streamingAssetsUrl: "StreamingAssets",
+        streamingAssetsUrl: "./StreamingAssets",
         companyName: "ElectroStudios",
         productName: "Carriage Protection Service",
         productVersion: "1.0",
