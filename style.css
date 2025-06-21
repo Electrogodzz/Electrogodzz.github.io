@@ -12,13 +12,14 @@ text-align: center;
 p
 {
 font-family: 'Vampire One', sans-serif;
-font-size: 24px; 
+font-size: 32px; 
+text-align: center;
 }
 hr {
   border: none;            /* remove default border */
-  height: 5px;             /* thickness of the line */
-  background-color: #ff0000; /* your chosen color (red example) */
-  width: 80%;              /* how wide the line is */
+  height: 10px;             /* thickness of the line */
+  background-color: #000000; /* your chosen color (black example) */
+  width: 100%;              /* how wide the line is */
   margin: 20px auto;       /* vertical spacing and center horizontally */
   border-radius: 3px;      /* optional: rounded edges */
 }
