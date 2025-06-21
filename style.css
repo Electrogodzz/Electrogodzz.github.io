@@ -1,5 +1,12 @@
 body
 {
-background-color: #00502e;
-font-family: 'Vampire One', serif;
+background-color: #005020;
+}
+h1
+{
+font-family: 'Vampire One', sans-serif;
+}
+p
+{
+font-family: 'Vampire One', sans-serif;
 }
