@@ -5,6 +5,8 @@ background-color: #005020;
 h1
 {
 font-family: 'Vampire One', sans-serif;
+border: 2px solid black;
+padding: 10px;
 }
 p
 {
