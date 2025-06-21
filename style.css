@@ -31,7 +31,7 @@ a {
 }
 
 a:hover {
-  color: #111111;          /* Darker green when hovering */
+  color: #ffffff;          /* Darker green when hovering */
   text-decoration: underline; /* Add underline on hover */
   cursor: pointer;         /* Show pointer cursor */
 }
