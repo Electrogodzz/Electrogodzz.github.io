@@ -41,8 +41,8 @@ a:hover {
 }
 .diamond-bg {
   position: absolute;
-  top: 50%;
-  left: 0%;
+  top: 100%;
+  left: 50%;
   width: 1000px;
   height: 1000px;
   background-color: #ffffff;
