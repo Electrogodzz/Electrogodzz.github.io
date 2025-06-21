@@ -46,7 +46,7 @@ a:hover {
   width: 1000px;
   height: 1000px;
   background-color: #ffffff;
-  transform: rotate(45deg);
+  transform: translate(-50%, -50%) rotate(45deg);
   z-index: -1; /* pushes it behind the content */
   opacity: 0.5; /* optional: make it faint */
 }
