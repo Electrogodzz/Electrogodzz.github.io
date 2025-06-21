@@ -50,7 +50,7 @@ a:hover {
   z-index: -1; /* pushes it behind the content */
   opacity: 0.5; /* optional: make it faint */
 }
-.banner-img {
+.Banner-img {
   display: block;
   margin: 0 auto;
 }
