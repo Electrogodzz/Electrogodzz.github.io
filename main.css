@@ -86,4 +86,5 @@ html, body {
 }
 .Bowl-image {
   animation: bob 20s ease-in-out infinite;
+  image-rendering: pixelated;
 }
