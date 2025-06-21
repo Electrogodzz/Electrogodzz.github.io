@@ -23,3 +23,15 @@ hr {
   margin: 20px auto;       /* vertical spacing and center horizontally */
   border-radius: 3px;      /* optional: rounded edges */
 }
+a {
+  color: #000000;          /* Change link color (green example) */
+  text-decoration: none;   /* Remove underline */
+  font-weight: bold;       /* Make it bold */
+  transition: color 0.3s;  /* Smooth color change on hover */
+}
+
+a:hover {
+  color: #111111;          /* Darker green when hovering */
+  text-decoration: underline; /* Add underline on hover */
+  cursor: pointer;         /* Show pointer cursor */
+}
