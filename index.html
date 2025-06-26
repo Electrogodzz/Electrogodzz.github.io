@@ -1,25 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/png" href="Happy.png">
-    <link href="https://fonts.googleapis.com/css2?family=Vampire+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="main.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electrodevzz Games</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Electrodevzz Games</title>
+  <link rel="icon" type="image/png" href="Happy.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Vampire+One&display=swap" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Vampire+One&display=swap');
+
+    body {
+      background-color: #cf7b00;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      position: relative;
+      font-family: 'Vampire One', Roboto, serif;
+      text-align: center;
+    }
+
+    h1 {
+      border: 2px solid black;
+      padding: 10px;
+    }
+
+    p {
+      font-size: 32px;
+    }
+
+    hr {
+      border: none;
+      height: 10px;
+      background-color: #000;
+      width: 100%;
+      margin: 20px auto;
+      border-radius: 3px;
+    }
+
+    a {
+      color: #000;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 32px;
+      transition: color 0.3s, font-size 0.3s;
+      display: inline-block;
+    }
+
+    a:hover {
+      color: #fff;
+      font-size: 40px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .diamond-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 500px;
+      height: 500px;
+      background-color: #fff;
+      opacity: 0.5;
+      transform: translate(-50%, -50%) rotate(45deg);
+      z-index: -1;
+      animation: spin 20s linear infinite;
+    }
+
+    @keyframes spin {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
+    .Banner-img {
+      display: block;
+      margin: 50px auto 0 auto;
+      width: 500px;
+      height: auto;
+    }
+
+    @keyframes bob {
+      0% {
+        transform: translate(-50%, -50%) rotate(-10deg);
+      }
+      50% {
+        transform: translate(-50%, -50%) rotate(10deg);
+      }
+      100% {
+        transform: translate(-50%, -50%) rotate(-10deg);
+      }
+    }
+
+    .Bowl-image {
+      animation: bob 2s ease-in-out infinite;
+      image-rendering: pixelated;
+      vertical-align: middle;
+    }
+
+    /* Cursor follower styles */
+    .follower {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50px;
+      pointer-events: none;
+      transition: transform 0.05s linear;
+      will-change: transform;
+      user-select: none;
+      z-index: 1000;
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome!</h1>
-    <br>
-    <p>These are my games</p>
-    <hr>
-    <div style="text-align: center;">
-    <a href="FoodFrenzy.html">Food Frenzy <img src="Bowl.png" class="Bowl-image" alt="Food Frenzy Bowl" height = "50"></a>
-    </div>
-    <p>In this game you collect fruit for a higher score</p>
-    <div class="diamond-bg"></div>
-    <img src="Banner.png" alt="Banner" class="Banner-img">
-    <img src="Happy.png" id="cursor-follower" class="follower">
-    <script src="main.js"></script>
+  <h1>Welcome!</h1>
+
+  <p>These are my games</p>
+  <hr />
+
+  <div>
+    <a href="FoodFrenzy.html">
+      Food Frenzy
+      <img src="Bowl.png" class="Bowl-image" alt="Food Frenzy Bowl" height="50" />
+    </a>
+  </div>
+
+  <p>In this game you collect fruit for a higher score</p>
+
+  <div class="diamond-bg"></div>
+
+  <img src="Banner.png" alt="Banner" class="Banner-img" />
+
+  <!-- Cursor follower image -->
+  <img src="Happy.png" id="cursor-follower" class="follower" alt="Cursor Follower" />
+
+  <script>
+    const follower = document.getElementById('cursor-follower');
+    let mouseX = 0;
+    let mouseY = 0;
+    let followerX = 0;
+    let followerY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animateFollower() {
+      // Move 10% toward cursor each frame, offset by 20px so it lags a little
+      followerX += (mouseX - followerX - 20) * 0.1;
+      followerY += (mouseY - followerY - 20) * 0.1;
+
+      follower.style.transform = `translate(${followerX}px, ${followerY}px)`;
+      requestAnimationFrame(animateFollower);
+    }
+
+    animateFollower();
+  </script>
 </body>
 </html>
