@@ -29,11 +29,27 @@ function animateFollower() {
 animateFollower();
 
 // Optional: change speech text over time or on events
-function say(text) {
-  speech.textContent = text;
+const phrases = [
+  "Hello there!",
+  "Welcome to my site!",
+  "Have a great day!",
+  "Enjoy the games!",
+  "Click around!",
+  "Thanks for visiting!",
+  "I like being a head",
+  "You are a great person",
+  "I love you friend!",
+  "Z z z, JK i am fully awake 24/7"
+];
+
+function sayRandom() {
+  const randomIndex = Math.floor(Math.random() * phrases.length);
+  speech.textContent = phrases[randomIndex];
 }
 
-// Example: change speech after 3 seconds
-setTimeout(() => {
-  say("Welcome to my site!");
-}, 3000);
+// Example: change speech every 3 seconds
+setInterval(sayRandom, 3000);
+
+// Call it once immediately to show text at start
+sayRandom();
+
