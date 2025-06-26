@@ -37,7 +37,13 @@ const phrases = [
   "Have a great day!",
   "Enjoy the games!",
   "Click around!",
-  "Thanks for visiting!"
+  "Thanks for visiting!",
+  "My name is Orbit, nice to meet you!",
+  "Z z z, JK I would never fall asleep on you!",
+  "I am as happy as can be to be your friend!",
+  "I love being your friend!",
+  "Hope you enjoy being on this site!",
+  "My creator put a lot of effort into me and this here site so I hope you enjoy!"
 ];
 
 function sayRandom() {
