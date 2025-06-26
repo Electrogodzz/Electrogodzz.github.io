@@ -4,9 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Electrodevzz Games</title>
-  <div id="speech-bubble" class="speech-bubble">Hello!</div>
-  <img src="Happy.png" id="cursor-follower" class="follower">
-
   <link href="https://fonts.googleapis.com/css2?family=Vampire+One&display=swap" rel="stylesheet" />
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Vampire+One&display=swap');
@@ -114,6 +111,24 @@
       user-select: none;
       z-index: 1000;
     }
+
+    /* Speech bubble styles */
+    #speech-bubble {
+      position: absolute;
+      padding: 8px 12px;
+      background: white;
+      border-radius: 10px;
+      border: 2px solid black;
+      font-family: 'Vampire One', Roboto, serif;
+      font-size: 18px;
+      pointer-events: none;
+      white-space: nowrap;
+      opacity: 0.9;
+      user-select: none;
+      z-index: 1001;
+      transform: translateX(-50%);
+      transition: opacity 0.3s ease;
+    }
   </style>
 </head>
 <body>
@@ -137,9 +152,12 @@
 
   <!-- Cursor follower image -->
   <img src="Happy.png" id="cursor-follower" class="follower" alt="Cursor Follower" />
+  <div id="speech-bubble">Hello!</div>
 
   <script>
     const follower = document.getElementById('cursor-follower');
+    const speech = document.getElementById('speech-bubble');
+
     let mouseX = 0;
     let mouseY = 0;
     let followerX = 0;
@@ -155,11 +173,37 @@
       followerX += (mouseX - followerX - 20) * 0.1;
       followerY += (mouseY - followerY - 20) * 0.1;
 
-      follower.style.transform = `translate(${followerX}px, ${followerY}px)`;
+      // Flip sprite horizontally depending on mouse position
+      const scaleX = mouseX < followerX ? -1 : 1;
+      follower.style.transform = `translate(${followerX}px, ${followerY}px) scaleX(${scaleX})`;
+
+      // Position speech bubble slightly above and centered horizontally to the follower
+      speech.style.left = `${followerX}px`;
+      speech.style.top = `${followerY - 60}px`; // 60px above sprite
+
       requestAnimationFrame(animateFollower);
     }
 
     animateFollower();
+
+    // Random phrases for speech bubble
+    const phrases = [
+      "Hello there!",
+      "Welcome to my site!",
+      "Have a great day!",
+      "Enjoy the games!",
+      "Click around!",
+      "Thanks for visiting!"
+    ];
+
+    function sayRandom() {
+      const randomIndex = Math.floor(Math.random() * phrases.length);
+      speech.textContent = phrases[randomIndex];
+    }
+
+    // Change speech every 3 seconds
+    setInterval(sayRandom, 3000);
+    sayRandom(); // Show initial phrase
   </script>
 </body>
 </html>
