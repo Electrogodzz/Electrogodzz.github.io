@@ -1,45 +1,62 @@
 @import url('https://fonts.googleapis.com/css2?family=Vampire+One&display=swap');
-body
-{
-background-color: #cf7b00;
-}
-h1
-{
-font-family: 'Vampire One', Roboto, serif;
-border: 2px solid black;
-padding: 10px;
-text-align: center;
-}
-p
-{
-font-family: 'Vampire One', Roboto, serif;
-font-size: 32px; 
-text-align: center;
-}
-hr {
-  border: none;            /* remove default border */
-  height: 10px;             /* thickness of the line */
-  background-color: #000000; /* your chosen color (black example) */
-  width: 100%;              /* how wide the line is */
-  margin: 20px auto;       /* vertical spacing and center horizontally */
-  border-radius: 3px;      /* optional: rounded edges */
-}
-a {
-  color: #000000;          /* Change link color (green example) */
-  text-decoration: none;   /* Remove underline */
-  font-weight: bold;
-  font-size: 32px; 
+
+body {
+  background-color: #cf7b00;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  position: relative;
+  font-family: 'Vampire One', Roboto, serif;
   text-align: center;
-  transition: color 0.3s, font-size 0.3s;  /* Smooth color change on hover */
+}
+
+h1 {
+  border: 2px solid black;
+  padding: 10px;
+}
+
+p {
+  font-size: 32px;
+}
+
+hr {
+  border: none;
+  height: 10px;
+  background-color: #000;
+  width: 100%;
+  margin: 20px auto;
+  border-radius: 3px;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 32px;
+  transition: color 0.3s, font-size 0.3s;
+  display: inline-block;
 }
 
 a:hover {
-  color: #ffffff;          /* Darker green when hovering */
-  font-size: 40px; 
-  text-align: center;
-  text-decoration: underline; /* Add underline on hover */
-  cursor: pointer;         /* Show pointer cursor */
+  color: #fff;
+  font-size: 40px;
+  text-decoration: underline;
+  cursor: pointer;
 }
+
+.diamond-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  height: 500px;
+  background-color: #fff;
+  opacity: 0.5;
+  transform: translate(-50%, -50%) rotate(45deg);
+  z-index: -1;
+  animation: spin 20s linear infinite;
+}
+
 @keyframes spin {
   from {
     transform: translate(-50%, -50%) rotate(0deg);
@@ -48,33 +65,14 @@ a:hover {
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
-.diamond-bg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 500px;
-  height: 500px;
-  background-color: #ffffff;
-  transform: translate(-50%, -50%) rotate(45deg);
-  z-index: -1; /* pushes it behind the content */
-  opacity: 0.5; /* optional: make it faint */
-  animation: spin 20s linear infinite;
-}
+
 .Banner-img {
-  bottom: 0;
-  left: 75%;
-  transform: translateX(-50%);
   display: block;
-  margin: 500px auto 0 auto;
+  margin: 50px auto 0 auto;
   width: 500px;
   height: auto;
 }
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  position: relative; /* important for absolute positioning inside */
-}
+
 @keyframes bob {
   0% {
     transform: translate(-50%, -50%) rotate(-10deg);
@@ -86,16 +84,22 @@ html, body {
     transform: translate(-50%, -50%) rotate(-10deg);
   }
 }
+
 .Bowl-image {
   animation: bob 2s ease-in-out infinite;
   image-rendering: pixelated;
+  vertical-align: middle;
 }
+
+/* Cursor follower styles */
 .follower {
   position: absolute;
   top: 0;
   left: 0;
-  pointer-events: none; /* lets you click through it */
-  width: 50px; /* or whatever size you want */
+  width: 50px;
+  pointer-events: none;
   transition: transform 0.05s linear;
+  will-change: transform;
+  user-select: none;
+  z-index: 1000;
 }
-
