@@ -179,7 +179,7 @@
   <div id="minigame-container">
     <h2>Mini Clicker Game</h2>
     <p>Clicks: <span id="click-count">0</span></p>
-    <button onclick="increment()">Click Me!</button>
+    <button id="click-button">Click Me!</button>
   </div>
 
   <img src="Banner.png" alt="Banner" class="Banner-img" />
@@ -192,19 +192,22 @@
   <script>
     // Mini clicker game counter
     let count = 0;
-    function increment() {
+    const clickCountElem = document.getElementById('click-count');
+    const clickButton = document.getElementById('click-button');
+
+    clickButton.addEventListener('click', () => {
       count++;
-      document.getElementById('click-count').textContent = count;
-    }
+      clickCountElem.textContent = count;
+    });
 
     // Cursor follower and speech bubble
     const follower = document.getElementById('cursor-follower');
     const speech = document.getElementById('speech-bubble');
 
-    let mouseX = 0;
-    let mouseY = 0;
-    let followerX = 0;
-    let followerY = 0;
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let followerX = mouseX;
+    let followerY = mouseY;
 
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
@@ -212,22 +215,43 @@
     });
 
     function animateFollower() {
-      followerX += (mouseX - followerX - 20) * 0.1;
-      followerY += (mouseY - followerY - 20) * 0.1;
+      // Calculate vector and distance between follower and mouse
+      const dx = mouseX - followerX;
+      const dy = mouseY - followerY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
 
+      const minDistance = 50; // Minimum distance from cursor (change this to adjust)
+
+      if (distance > minDistance) {
+        // Normalize direction vector
+        const dirX = dx / distance;
+        const dirY = dy / distance;
+
+        // Target position at minDistance away from mouse
+        const targetX = mouseX - dirX * minDistance;
+        const targetY = mouseY - dirY * minDistance;
+
+        // Smoothly move follower 10% closer to target position each frame
+        followerX += (targetX - followerX) * 0.1;
+        followerY += (targetY - followerY) * 0.1;
+      }
+      // If closer than minDistance, don’t move closer
+
+      // Flip horizontally if cursor is left of follower
       const scaleX = mouseX < followerX ? -1 : 1;
-
       follower.style.transform = `translate(${followerX}px, ${followerY}px) scaleX(${scaleX})`;
 
+      // Position speech bubble above and horizontally centered on follower
       speech.style.left = `${followerX}px`;
-      speech.style.top = `${followerY - 60}px`;
-      speech.style.transform = 'translateX(-50%)';
+      speech.style.top = `${followerY - 60}px`; // adjust vertical offset if needed
+      speech.style.transform = 'translateX(-50%)'; // center horizontally
 
       requestAnimationFrame(animateFollower);
     }
 
     animateFollower();
 
+    // Random phrases for speech bubble
     const phrases = [
       "Hello there!",
       "Welcome to my site!",
@@ -248,8 +272,9 @@
       speech.textContent = phrases[randomIndex];
     }
 
+    // Change speech text every 3 seconds
     setInterval(sayRandom, 3000);
-    sayRandom();
+    sayRandom(); // Show initial phrase
   </script>
 </body>
 </html>
