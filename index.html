@@ -129,6 +129,34 @@
       transform: translateX(-50%);
       transition: opacity 0.3s ease;
     }
+
+    /* Mini game container styles */
+    #minigame-container {
+      margin: 40px auto;
+      background: white;
+      border: 2px solid black;
+      border-radius: 12px;
+      width: 300px;
+      padding: 20px;
+      font-family: 'Vampire One', Roboto, serif;
+      font-size: 20px;
+      user-select: none;
+    }
+
+    #minigame-container button {
+      font-size: 24px;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: 2px solid black;
+      background-color: #eee;
+      transition: background-color 0.3s;
+    }
+
+    #minigame-container button:hover {
+      background-color: #ddd;
+    }
   </style>
 </head>
 <body>
@@ -147,19 +175,29 @@
   <p>In this game you collect fruit for a higher score</p>
 
   <div class="diamond-bg"></div>
+
   <div id="minigame-container">
-  <h2>Mini Clicker Game</h2>
-  <p>Clicks: <span id="click-count">0</span></p>
-  <button onclick="increment()">Click Me!</button>
-</div>
+    <h2>Mini Clicker Game</h2>
+    <p>Clicks: <span id="click-count">0</span></p>
+    <button onclick="increment()">Click Me!</button>
+  </div>
 
   <img src="Banner.png" alt="Banner" class="Banner-img" />
 
   <!-- Cursor follower image -->
   <img src="Happy.png" id="cursor-follower" class="follower" alt="Cursor Follower" />
+
   <div id="speech-bubble">Hello!</div>
 
   <script>
+    // Mini clicker game counter
+    let count = 0;
+    function increment() {
+      count++;
+      document.getElementById('click-count').textContent = count;
+    }
+
+    // Cursor follower and speech bubble
     const follower = document.getElementById('cursor-follower');
     const speech = document.getElementById('speech-bubble');
 
@@ -174,31 +212,35 @@
     });
 
     function animateFollower() {
-      // Move 10% toward cursor each frame, offset by 20px so it lags a little
       followerX += (mouseX - followerX - 20) * 0.1;
       followerY += (mouseY - followerY - 20) * 0.1;
 
-      // Flip sprite horizontally depending on mouse position
       const scaleX = mouseX < followerX ? -1 : 1;
+
       follower.style.transform = `translate(${followerX}px, ${followerY}px) scaleX(${scaleX})`;
 
-      // Position speech bubble slightly above and centered horizontally to the follower
       speech.style.left = `${followerX}px`;
-      speech.style.top = `${followerY - 60}px`; // 60px above sprite
+      speech.style.top = `${followerY - 60}px`;
+      speech.style.transform = 'translateX(-50%)';
 
       requestAnimationFrame(animateFollower);
     }
 
     animateFollower();
 
-    // Random phrases for speech bubble
     const phrases = [
       "Hello there!",
       "Welcome to my site!",
       "Have a great day!",
       "Enjoy the games!",
       "Click around!",
-      "Thanks for visiting!"
+      "Thanks for visiting!",
+      "My name is Orbit, nice to meet you!",
+      "Z z z, JK I would never fall asleep on you!",
+      "I am as happy as can be to be your friend!",
+      "I love being your friend!",
+      "Hope you enjoy being on this site!",
+      "My creator put a lot of effort into me and this here site so I hope you enjoy!"
     ];
 
     function sayRandom() {
@@ -206,9 +248,8 @@
       speech.textContent = phrases[randomIndex];
     }
 
-    // Change speech every 3 seconds
     setInterval(sayRandom, 3000);
-    sayRandom(); // Show initial phrase
+    sayRandom();
   </script>
 </body>
 </html>
