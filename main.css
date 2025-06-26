@@ -90,3 +90,12 @@ html, body {
   animation: bob 2s ease-in-out infinite;
   image-rendering: pixelated;
 }
+.follower {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none; /* lets you click through it */
+  width: 50px; /* or whatever size you want */
+  transition: transform 0.05s linear;
+}
+
