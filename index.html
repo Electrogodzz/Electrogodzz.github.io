@@ -179,7 +179,7 @@
   <div id="minigame-container">
     <h2>Mini Clicker Game</h2>
     <p>Clicks: <span id="click-count">0</span></p>
-    <button id="click-button">Click Me!</button>
+    <button onclick="increment()">Click Me!</button>
   </div>
 
   <img src="Banner.png" alt="Banner" class="Banner-img" />
@@ -192,22 +192,19 @@
   <script>
     // Mini clicker game counter
     let count = 0;
-    const clickCountElem = document.getElementById('click-count');
-    const clickButton = document.getElementById('click-button');
-
-    clickButton.addEventListener('click', () => {
+    function increment() {
       count++;
-      clickCountElem.textContent = count;
-    });
+      document.getElementById('click-count').textContent = count;
+    }
 
     // Cursor follower and speech bubble
     const follower = document.getElementById('cursor-follower');
     const speech = document.getElementById('speech-bubble');
 
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let followerX = mouseX;
-    let followerY = mouseY;
+    let mouseX = 0;
+    let mouseY = 0;
+    let followerX = 0;
+    let followerY = 0;
 
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
@@ -220,7 +217,7 @@
       const dy = mouseY - followerY;
       const distance = Math.sqrt(dx * dx + dy * dy);
 
-      const minDistance = 50; // Minimum distance from cursor (change this to adjust)
+      const minDistance = 80; // Minimum distance from cursor (adjust as you like)
 
       if (distance > minDistance) {
         // Normalize direction vector
@@ -235,7 +232,7 @@
         followerX += (targetX - followerX) * 0.1;
         followerY += (targetY - followerY) * 0.1;
       }
-      // If closer than minDistance, don’t move closer
+      // If inside minDistance, don't move closer
 
       // Flip horizontally if cursor is left of follower
       const scaleX = mouseX < followerX ? -1 : 1;
@@ -251,7 +248,6 @@
 
     animateFollower();
 
-    // Random phrases for speech bubble
     const phrases = [
       "Hello there!",
       "Welcome to my site!",
