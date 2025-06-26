@@ -103,3 +103,16 @@ a:hover {
   user-select: none;
   z-index: 1000;
 }
+.speech-bubble {
+  position: absolute;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 10px;
+  border: 2px solid black;
+  font-family: 'Vampire One', Roboto, serif;
+  font-size: 18px;
+  pointer-events: none; /* So it doesn’t block mouse */
+  white-space: nowrap;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
