@@ -56,3 +56,8 @@ setInterval(sayRandom, 3000);
 
 // Show initial speech immediately
 sayRandom();
+let count = 0;
+function increment() {
+  count++;
+  document.getElementById('click-count').textContent = count;
+}
