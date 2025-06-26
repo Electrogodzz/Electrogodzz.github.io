@@ -12,18 +12,35 @@ document.addEventListener('mousemove', (e) => {
 });
 
 function animateFollower() {
-  // Move 10% toward cursor each frame, offset by 20px so it lags a little
-  followerX += (mouseX - followerX - 20) * 0.1;
-  followerY += (mouseY - followerY - 20) * 0.1;
+  // Calculate vector and distance between follower and mouse
+  const dx = mouseX - followerX;
+  const dy = mouseY - followerY;
+  const distance = Math.sqrt(dx * dx + dy * dy);
+
+  const minDistance = 50; // Minimum distance from cursor (change as you want)
+
+  if (distance > minDistance) {
+    // Normalize direction vector
+    const dirX = dx / distance;
+    const dirY = dy / distance;
+
+    // Target position at minDistance away from mouse
+    const targetX = mouseX - dirX * minDistance;
+    const targetY = mouseY - dirY * minDistance;
+
+    // Smoothly move follower 10% closer to target position each frame
+    followerX += (targetX - followerX) * 0.1;
+    followerY += (targetY - followerY) * 0.1;
+  }
+  // If closer than minDistance, don’t move closer
 
   // Flip horizontally if cursor is left of follower
   const scaleX = mouseX < followerX ? -1 : 1;
-
   follower.style.transform = `translate(${followerX}px, ${followerY}px) scaleX(${scaleX})`;
 
-  // Position speech bubble slightly above and centered horizontally to the follower
+  // Position speech bubble above and horizontally centered on follower
   speech.style.left = `${followerX}px`;
-  speech.style.top = `${followerY - 60}px`;  // adjust vertical offset as needed
+  speech.style.top = `${followerY - 60}px`; // adjust vertical offset if needed
   speech.style.transform = 'translateX(-50%)'; // center horizontally
 
   requestAnimationFrame(animateFollower);
@@ -56,6 +73,7 @@ setInterval(sayRandom, 3000);
 
 // Show initial speech immediately
 sayRandom();
+
 let count = 0;
 function increment() {
   count++;
