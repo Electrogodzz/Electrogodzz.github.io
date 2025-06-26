@@ -1,4 +1,5 @@
 const follower = document.getElementById('cursor-follower');
+// initial positions
 let mouseX = 0;
 let mouseY = 0;
 let followerX = 0;
@@ -10,11 +11,17 @@ document.addEventListener('mousemove', (e) => {
 });
 
 function animateFollower() {
-  // Move 10% toward cursor each frame, offset by 20px so it lags a little
+  // Move follower 10% toward cursor with 20px offset
   followerX += (mouseX - followerX - 20) * 0.1;
   followerY += (mouseY - followerY - 20) * 0.1;
 
-  follower.style.transform = `translate(${followerX}px, ${followerY}px)`;
+  // Flip horizontally if mouse is to the left of the follower's current position
+  if (mouseX < followerX) {
+    follower.style.transform = `translate(${followerX}px, ${followerY}px) scaleX(-1)`;
+  } else {
+    follower.style.transform = `translate(${followerX}px, ${followerY}px) scaleX(1)`;
+  }
+
   requestAnimationFrame(animateFollower);
 }
 
